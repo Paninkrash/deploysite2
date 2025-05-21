@@ -1,0 +1,21 @@
+{% extends "main/base.html" %}
+{% load static %}
+
+{% block title %}
+    {{test.name}}
+{% endblock title %}
+
+{% block content %}
+<div class="detail-test d-flex">
+    <div class="detail-image">
+        <img src={% if test.image %}{{test.image.url}}{%else%}{% static 'image/noimage.jpg' %}{% endif %} alt="" class="detail-image">
+    </div>
+        <div class="detail-description">
+            <h2>{{test.name}}</h2>
+            <h3>Категория: {{test.category}}</h3>
+            <p>Описание: {{test.description | linebreaks}}</p>
+    </div>
+</div>
+{% endblock content %}
+
+
