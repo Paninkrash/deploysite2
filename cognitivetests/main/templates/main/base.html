@@ -32,7 +32,14 @@
             </div>
             <div class = "header-profile">
                 {% if user.is_authenticated %}
-                    <a href={%url "users:profile" %}>Профиль</a>
+                    <a href={%url "users:profile" %}>{{ user.username }}</a>
+                    <a href="{% url 'users:profile' %}">
+                    {% if user.image %}
+                        <img src="{{ user.image.url }}"  class="header-avatar rounded-circle">
+                    {% else %}
+                        <img src="{% static 'image/defaultavatar.jpg' %}" class="header-avatar rounded-circle">
+                    {% endif %}
+                    </a>
                 {% else %}
                     <a href = {%url 'users:login'%} class = "m-3">Вход</a>
                 {% endif %}

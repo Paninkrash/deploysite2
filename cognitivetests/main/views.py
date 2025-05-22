@@ -3,6 +3,7 @@ from .models import Test, Category
 
 def popular_list(request):
     tests = Test.objects.all()
+    tests = tests.order_by('-created_at')
     return render(request, 'main/index/index.html', {'tests': tests})
 
 def test_detail(request, slug):
@@ -17,6 +18,7 @@ def test_list(request, category_slug = None):
     if category_slug:
         category = get_object_or_404(Category, slug = category_slug)
         tests = tests.filter(category = category)
+    tests = tests.order_by('-created_at')
     return render(request, 'main/test/list.html',
     {'category': category,
     'categories': categories,

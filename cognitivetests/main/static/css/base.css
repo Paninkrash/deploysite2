@@ -90,6 +90,13 @@ h5{
    color: #000 
 }
 
+.header-avatar {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
 .home{
     align-items: center;
 }
@@ -99,9 +106,14 @@ h5{
     margin-bottom: 50px;
 }
 
+.home-cards {
+    width: 100%;
+    display: grid !important;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 16px;           
+}
+
 .home-card{
-    width: 200px;
-    height: 300px;
     border: 1px solid #00000027;
     border-radius: 5px;
     transition: all 0.5s ease;
