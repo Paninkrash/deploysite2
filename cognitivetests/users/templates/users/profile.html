@@ -1,0 +1,49 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block title %}Профиль{% endblock title %}
+
+{% block content %}
+    <div class="d-flex">
+        <div class="windowp d-flex bg-white p-4 mb-4 mx-2 rounded">
+            <form action="{% url "users:profile" %}" method = "post" enctype = "multipart/form-data">
+                <h2 class = "mb-2">Профиль</h2>
+                {% csrf_token %}
+                <div class="d-flex">
+                    <div class="1box">
+                        <div class="col-md-12 mb-3">
+                                {% if user.image %}
+                                    <img src = "{{user.image.url }}" alt = "Аватарка" class = "img-fluid" style = "max-width: 150px; max-height: 150px;">
+                                {% else %}
+                                    <img src = "{% static 'image/defaultavatar.jpg' %}" alt = "Аватарка" class = "img-fluid" style = "max-width: 150px; max-height: 150px;">
+                                {% endif %}
+                                <input type="file" class = "form-control form-styleprofile mt-2" id = "id_image" name = "image" accept = "image/*">
+                        </div>
+                        <div class="col-md-12 mb-3">
+                            <label for="id_first_name" class = "form-label">Имя</label>
+                            <input type="text" class = "form-control form-styleprofile" id = "id_first_name" name = "first_name" placeholder="Ваше имя" value = "{{form.first_name.value}}" required>
+                        </div>
+                        <div class="col-md-12 mb-3">
+                            <label for="id_last_name" class = "form-label">Фамилия</label>
+                            <input type="text" class = "form-control form-styleprofile" id = "id_last_name" name = "last_name" placeholder="Ваша фамилия" value = "{{form.last_name.value}}" required>
+                        </div>
+                    </div>
+                        <div class="2-box">
+                            <div class="col-md-12 mb-3">
+                                <label for="id_username" class = "form-label">Имя пользователя</label>
+                                <input type="text" class = "form-control form-styleprofile" id = "id_username" name = "username" placeholder="Ваше имя пользователя" value = "{{form.username.value}}" required> 
+                        </div>
+                        <div class="col-md-12 mb-3">
+                                <label for="id_email" class = "form-label">Электронная почта</label>
+                                <input type="email" class = "form-control form-styleprofile" id = "id_email" name = "email" placeholder="Ваша электронная почта" value = "{{form.email.value}}" required> 
+                        </div>
+                    </div>
+                </div>
+                <div class="btns d-flex gap-4 mt-4">
+                    <button type = "submit" class = "profile-btn">Сохранить</button>
+                    <a class = "profile-btn" href="{% url "user:logout" %}">Выйти из аккаунта</a>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock content %}

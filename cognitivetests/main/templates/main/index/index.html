@@ -5,8 +5,12 @@
 
 {% block content%}
 <section class="home d-flex flex-column">
+    <div class="home-text mb-4">
+        <h1>Добро пожаловать на главную страницу!</h1>
+        <p>Здесь вы можете выбрать любой из понравившихся вам тестов.</p>
+    </div>
     <div class="home-title d-flex flex-column align-items-center">
-        <a href="#" class = "home-btn mt-4">ВСЕ ТЕСТЫ</a>
+        <p class = "home-btn mt-4">ВСЕ ТЕСТЫ</p>
     </div>
     <div class="home-cards d-flex gap-4">
         {% for test in tests %}
