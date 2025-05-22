@@ -16,6 +16,11 @@
             <p>Описание: {{test.description | linebreaks}}</p>
     </div>
 </div>
+{% if test.name != "Скоро появится..." %}
+    <div class = "detail-startbtn">
+        <button>Начать тест</button>
+    </div>
+{%endif%}
 {% endblock content %}
 
 
