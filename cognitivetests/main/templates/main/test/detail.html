@@ -18,7 +18,9 @@
 </div>
 {% if test.name != "Скоро появится..." %}
     <div class = "detail-startbtn">
-        <button>Начать тест</button>
+        <a href="{% url 'main:test_start' test.slug %}">
+            <button>Начать тест</button>
+        </a>
     </div>
 {%endif%}
 {% endblock content %}

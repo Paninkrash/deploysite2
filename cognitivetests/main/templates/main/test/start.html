@@ -1,0 +1,43 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block content %}
+<div id="vue-app">
+    <!-- Здесь будет рендериться Vue-компонент теста -->
+    <component :is="currentTest"></component>
+</div>
+
+<!-- Подключаем Vue 3 -->
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+<!-- Динамически подключаем JS теста -->
+<script>
+const { createApp, ref, onMounted } = Vue;
+
+// Базовый компонент-заглушка
+const FallbackComponent = {
+    template: `<div class="test-loading">Загрузка теста...</div>`
+};
+
+createApp({
+    setup() {
+        const currentTest = ref(FallbackComponent);
+        
+        onMounted(async () => {
+            try {
+                // Динамически импортируем нужный модуль
+                const module = await import(`{% static 'js/tests/' %}{{ game_type }}.js`);
+                currentTest.value = module.default || module.TestComponent;
+            } catch (error) {
+                console.error('Ошибка загрузки теста:', error);
+                currentTest.value = {
+                    template: `<div class="test-error">Тест "{{ game_type }}" не найден</div>`
+                };
+            }
+        });
+        
+        return { currentTest };
+    }
+}).mount('#vue-app');
+</script>
+{% endblock %}

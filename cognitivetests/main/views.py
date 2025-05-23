@@ -24,3 +24,11 @@ def test_list(request, category_slug = None):
     'categories': categories,
     'tests': tests})
 
+def test_start(request, slug):
+    test = get_object_or_404(Test, slug=slug)
+    context = {
+        'test': test,
+        'game_type': test.slug,  
+    }
+    return render(request, 'main/test/start.html', context)
+
